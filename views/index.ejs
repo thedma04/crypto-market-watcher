@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>BitCoin</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+   
+    <p>Welcome to Bitcoin</p>
+
+    <script src='http://localhost:3000/socket.io/socket.io.js'></script>
+
+    <script>
+       const socket = io.connect('http://localhost:3000')
+
+       socket.on('connect', function(){
+         console.log('hellow world')
+       })
+
+       socket.on('market data', function(data){
+         console.log(data)
+       })
+    </script>
   </body>
 </html>
