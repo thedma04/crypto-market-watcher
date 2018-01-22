@@ -4,7 +4,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "test": "mocha --recursive './test/*Test.js' --compilers js:babel-core/register"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "body-parser": "^1.16.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
+    "crypto-socket": "^3.0.0",
     "debug": "^3.0.0",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
@@ -32,6 +33,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-mocha": "^4.11.0",
-    "eslint-plugin-react": "^7.2.1"
+    "eslint-plugin-react": "^7.2.1",
+    "nodemon": "^1.14.11"
   }
 }

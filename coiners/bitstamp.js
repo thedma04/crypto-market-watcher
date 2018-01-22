@@ -13,8 +13,6 @@ module.exports = (io) => {
       close: trade.price,
       symbol: 'USD'
     };
-
-    console.log(data)
     io.emit('market data', data);
   });
 };

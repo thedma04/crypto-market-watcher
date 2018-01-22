@@ -3,23 +3,55 @@
   <head>
     <title>BitCoin</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <style>
+       .prices{
+         font-size: 5em;
+         color: blue
+       }
+       .actual{
+         color: yellow
+       }
+    </style>
   </head>
   <body>
    
     <p>Welcome to Bitcoin</p>
 
-    <script src='http://localhost:3000/socket.io/socket.io.js'></script>
+    <h1 style="text-align:center" class="prices">BitCoin Prices</h1>
+    
+    <div style="text-align:center">
+      <h1>BitStamp: <span id="bitstamp" class="actual"></span></h1>
+      <h1>Gdax: <span id="gdax" class="actual"></span></h1>
+      <h1>Bittrex: <span id="bittrex" class="actual"></span></h1>
+      <h1>Bitfinex: <span id="bitfinex" class="actual"></span></h1>
+      <h1>BitMex: <span id="bitmex" class="actual"></span></h1>
+  </div>
+    <script src='http://localhost:5000/socket.io/socket.io.js'></script>
 
     <script>
-       const socket = io.connect('http://localhost:3000')
+       const socket = io.connect('http://localhost:5000')
 
        socket.on('connect', function(){
-         console.log('hellow world')
+         console.log('hello world')
        })
 
-       socket.on('market data', function(data){
-         console.log(data)
-       })
+      socket.on('bitcoin', function(data){
+        
+        let bitStamp = document.querySelector('#bitstamp')
+        let gdax = document.querySelector('#gdax')
+        let bitmex = document.querySelector('#bitmex')
+        let bitfinex = document.querySelector('#bitfinex')
+        let bittrex = document.querySelector('#bittrex')
+        
+        bitStamp.innerHTML = `$ ${data.Bitstamp}`
+        gdax.innerHTML = `$ ${data.gdax}`
+        bitmex.innerHTML = `$ ${data.BitMex}`
+        bitfinex.innerHTML = `$ ${data.Bitfinex}`
+        bittrex.innerHTML = `$ ${data.Bittrex}`
+        console.log(data)
+      })
+      // socket.emit('some', {name: 'Terrence'})
     </script>
   </body>
 </html>
