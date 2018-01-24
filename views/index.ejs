@@ -3,39 +3,58 @@
   <head>
     <title>BitCoin</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-
-    <style>
-       .prices{
-         font-size: 5em;
-         color: blue
-       }
-       .actual{
-         color: yellow
-       }
-    </style>
   </head>
   <body>
-   
-    <p>Welcome to Bitcoin</p>
-
-    <h1 style="text-align:center" class="prices">BitCoin Prices</h1>
+    <div class="wrapper">
+      <div class="col bitcoin">
+        <h1>Ƀ</1>
+        <h4>BitMex</h4>
+        $<span id="bitmex"></span>
+        <div class="chan">24 Hour Change:<span id="bchange"></span></div>
+      </div>
+      <div class="col litecoin">
+        <h1>Ł</1>
+        <h4>BitStamp</h4>
+        $<span id="bitstamp"></span>
+        <div class="chan">24 Hour Change:<span id="change"></span></div>
+      </div>
+      <div class="col ethereum">
+        <h1>Ξ</1>
+        <h4>Gdax</h4>
+        $<span id="gdax"></span>
+        <div class="chan">24 Hour Change:<span id="echange"></span></div>
+      </div>
+        
+        <div class="col ripple">
+        <h1>XRP</1>
+        <h4>BitFinex</h4>
+        $<span id="bitfinex"></span>
+        <div class="chan">24 Hour Change:<span id="rchange"></span></div>
+      </div>
+        
+        
+      </div>
     
-    <div style="text-align:center">
-      <h1>BitStamp: <span id="bitstamp" class="actual"></span></h1>
-      <h1>Gdax: <span id="gdax" class="actual"></span></h1>
-      <h1>Bittrex: <span id="bittrex" class="actual"></span></h1>
-      <h1>Bitfinex: <span id="bitfinex" class="actual"></span></h1>
-      <h1>BitMex: <span id="bitmex" class="actual"></span></h1>
-  </div>
     <script src='http://localhost:5000/socket.io/socket.io.js'></script>
 
     <script>
        const socket = io.connect('http://localhost:5000')
 
+       
        socket.on('connect', function(){
-         console.log('hello world')
+         console.log('Client Connected')
+         let dis = document.querySelector('h2')
+          dis.style.display = 'none'
        })
 
+       socket.on('dare', (name) => {
+          console.log(name)
+       })
+      socket.on('disconnect', function(){
+          let dis = document.querySelector('h2')
+          dis.style.display = ''
+          dis.innerHTML = 'Sorry Socket disconnected'
+      })
       socket.on('bitcoin', function(data){
         
         let bitStamp = document.querySelector('#bitstamp')
