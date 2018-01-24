@@ -1,22 +1,24 @@
 const express = require( 'express');
 const db = require('../models');
 const localAuth = require('../services/auth')
-const requireAuth = require('../middleware')
+const middleware = require('../middleware')
 const router = express.Router();
 
 /* GET index page. */
-router.get('/', requireAuth,(req, res) => {
+router.get('/login', (req, res) => {
+  res.render('login')
+});
+
+router.get('/', middleware.requireAuth,(req, res) => {
   res.render('index', {
     title: 'BitCoin'
   });
 });
 
-router.get('/login', (req, res) => {
-  res.render('login')
-});
 
-router.post('/login', localAuth, (req, res) => {
-  console.log(req.user)
+
+router.post('/login', localAuth, (req, res, next)=> {
+  next()
 })
 
 router.get('/signup', (req, res) => {

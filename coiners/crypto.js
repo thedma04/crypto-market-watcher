@@ -9,7 +9,6 @@ module.exports = (io) => {
     setInterval(() => {
       data = {
         Bitstamp: exc.bitstamp.BTCUSD || '',
-        gdax: exc.gdax.BTCUSD || '',
         BitMex: exc.bitmex.BTCUSD || '',
         Bittrex: exc.bittrex.BTCUSD || '',
         Bitfinex: exc.bitfinex.BTCUSD || ''
@@ -17,7 +16,7 @@ module.exports = (io) => {
       io.emit('bitcoin', data);
     }, 1000);
 
-  }, 0);
+  }, 2000);
 
 
 };

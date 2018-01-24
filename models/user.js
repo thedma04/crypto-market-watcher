@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.prototype.authenticateUser = function authenticateUser(password){
-    console.log(password, this.password)
     return compareSync(password, this.password)
   }
 

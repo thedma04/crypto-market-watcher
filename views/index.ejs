@@ -2,33 +2,33 @@
 <html>
   <head>
     <title>BitCoin</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/index.css' />
   </head>
   <body>
     <div class="wrapper">
       <div class="col bitcoin">
         <h1>Ƀ</1>
         <h4>BitMex</h4>
-        $<span id="bitmex"></span>
+        <span id="bitmex"></span>
         <div class="chan">24 Hour Change:<span id="bchange"></span></div>
       </div>
       <div class="col litecoin">
         <h1>Ł</1>
         <h4>BitStamp</h4>
-        $<span id="bitstamp"></span>
+        <span id="bitstamp"></span>
         <div class="chan">24 Hour Change:<span id="change"></span></div>
       </div>
       <div class="col ethereum">
         <h1>Ξ</1>
-        <h4>Gdax</h4>
-        $<span id="gdax"></span>
+        <h4>Bitrex</h4>
+        <span id="bittrex"></span>
         <div class="chan">24 Hour Change:<span id="echange"></span></div>
       </div>
         
         <div class="col ripple">
         <h1>XRP</1>
         <h4>BitFinex</h4>
-        $<span id="bitfinex"></span>
+        <span id="bitfinex"></span>
         <div class="chan">24 Hour Change:<span id="rchange"></span></div>
       </div>
         
@@ -43,32 +43,19 @@
        
        socket.on('connect', function(){
          console.log('Client Connected')
-         let dis = document.querySelector('h2')
-          dis.style.display = 'none'
        })
 
-       socket.on('dare', (name) => {
-          console.log(name)
-       })
-      socket.on('disconnect', function(){
-          let dis = document.querySelector('h2')
-          dis.style.display = ''
-          dis.innerHTML = 'Sorry Socket disconnected'
-      })
       socket.on('bitcoin', function(data){
-        
+        console.log(data)
         let bitStamp = document.querySelector('#bitstamp')
-        let gdax = document.querySelector('#gdax')
         let bitmex = document.querySelector('#bitmex')
         let bitfinex = document.querySelector('#bitfinex')
         let bittrex = document.querySelector('#bittrex')
         
         bitStamp.innerHTML = `$ ${data.Bitstamp}`
-        gdax.innerHTML = `$ ${data.gdax}`
         bitmex.innerHTML = `$ ${data.BitMex}`
         bitfinex.innerHTML = `$ ${data.Bitfinex}`
         bittrex.innerHTML = `$ ${data.Bittrex}`
-        console.log(data)
       })
       // socket.emit('some', {name: 'Terrence'})
     </script>
