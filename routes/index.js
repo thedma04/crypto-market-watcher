@@ -15,11 +15,12 @@ router.get('/', middleware.requireAuth,(req, res) => {
   });
 });
 
-
-
-router.post('/login', localAuth, (req, res, next)=> {
-  next()
+router.get('/logout', (req,res) => {
+  req.logout()
+  res.render('login')
 })
+
+router.post('/login', localAuth)
 
 router.get('/signup', (req, res) => {
   res.render('signup')
@@ -29,7 +30,9 @@ router.get('/signup', (req, res) => {
 router.post('/signup', (req, res) => {
   db.User.create({name: req.body.name, password:req.body.password, email:req.body.email})
   .then(() => res.redirect(200, 'login'))
-  .catch(err =>  console.log(err))
+  .catch(err => res.render('signup', {
+    err: 'Sorry something went wrong, Try Again'
+  }))
 })
 
 

@@ -3,9 +3,18 @@
   <head>
     <title>BitCoin</title>
     <link rel='stylesheet' href='/stylesheets/index.css' />
+
+    <style>
+        .ti {
+          color: indigo;
+          text-align: center;
+        }
+    </style>
   </head>
   <body>
     <div class="wrapper">
+      <a id'logout' href="/logout">Logout</a>
+      <h3 class="ti">BITCOIN PRICES</h3>
       <div class="col bitcoin">
         <h1>Ƀ</1>
         <h4>BitMex</h4>
@@ -31,10 +40,9 @@
         <span id="bitfinex"></span>
         <div class="chan">24 Hour Change:<span id="rchange"></span></div>
       </div>
-        
-        
       </div>
-    
+  </div>
+  
     <script src='http://localhost:5000/socket.io/socket.io.js'></script>
 
     <script>
