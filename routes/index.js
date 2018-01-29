@@ -1,7 +1,8 @@
-const express = require( 'express');
-const db = require('../models');
-const localAuth = require('../services/auth')
-const middleware = require('../middleware')
+import express from 'express';
+import db from '../models'
+import localAuth from '../services/auth'
+import middleware from '../middleware'
+
 const router = express.Router();
 
 /* GET index page. */
@@ -9,7 +10,7 @@ router.get('/login', (req, res) => {
   res.render('login')
 });
 
-router.get('/', middleware.requireAuth,(req, res) => {
+router.get('/',(req, res) => {
   res.render('index', {
     title: 'BitCoin'
   });

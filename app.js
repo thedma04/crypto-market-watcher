@@ -1,20 +1,15 @@
-'use strict';
-require('babel-core/register');
-require('babel-polyfill');
 
-const express = require('express');
-const http = require('http')
-const cookieParser = require('cookie-parser')
-const passport = require('passport')
-const bodyParser = require('body-parser')
-const session = require('express-session')
-const path = require('path')
-const models = require('./models')
+import express from 'express';
+import http from 'http'
+import cookieParser from 'cookie-parser'
+import passport from 'passport'
+import bodyParser from 'body-parser'
+import session from 'express-session'
+import models from './models'
 
-const BitcoinExchanges = require('./coiners/crypto')
+import BitcoinExchanges from './coiners/crypto'
 
-const index =  require('./routes/index');
-//  import cookieParser from 'cookie-parser';
+import index from './routes'
 
 const app = express();
 const server = http.createServer(app)

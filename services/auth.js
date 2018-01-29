@@ -1,23 +1,25 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local')
-const db = require('../models')
+import passport from 'passport';
+import LocalStrategy from 'passport-local';
+
+import db from '../models';
 
 /**
+ *
  * Local Strategy Auth
  */
 
 // Passport serialize session
-passport.serializeUser(function(user, done){
+passport.serializeUser((user, done) => {
     done(null, user)
-})
+});
 
-passport.deserializeUser(function(user, done){
+passport.deserializeUser((user, done) => {
     db.User.findById(user.id).then(function(user){
         done(null, user)
     }).catch(function(err){
         done(null, false)
     })
-})
+});
 
 
 const localOpts = { usernameField: 'email' };
@@ -28,9 +30,10 @@ const localLogin = new LocalStrategy(
     try {
       const user = await db.User.findOne({ email });
 
+      console.log(password)
       if (!user) {
         return done(null, false);
-      } else if (!user.authenticateUser(password)) {
+      } else if (!user.comparePassword(password)) {
         return done(null, false);
       }
 
@@ -41,8 +44,8 @@ const localLogin = new LocalStrategy(
   },
 );
 
-passport.use(localLogin)
-module.exports = passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/signup'
-})
+passport.use(localLogin);
+export default passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/signup'
+});

@@ -1,23 +1,20 @@
-'use strict';
-const {hashSync, compareSync} = require('bcrypt-nodejs');
+import { hashSync, compareSync } from 'bcrypt-nodejs';
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     name: DataTypes.STRING,
     email: {
-        type: DataTypes.STRING,
-        unique: true
+      type: DataTypes.STRING,
+      unique: true
     },
     password: DataTypes.STRING
   });
 
-  User.beforeCreate((user, fn) => {
-     return user.password = hashPassword(user.password)
-  });
+  User.beforeCreate(user => user.password = hashPassword(user.password));
 
-  User.prototype.authenticateUser = function authenticateUser(password){
-    return compareSync(password, this.password)
-  }
+  User.prototype.comparePassword = function comparePassword(password) {
+    return compareSync(password, this.password);
+  };
 
   function hashPassword(password) {
     return hashSync(password);

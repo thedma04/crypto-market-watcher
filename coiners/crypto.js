@@ -2,7 +2,7 @@ const cryptoSocket = require('crypto-socket');
 
 cryptoSocket.start();
 
-module.exports = (io) => {
+export default (io) => {
   setTimeout(() => {
     let data = {};
     const exc = cryptoSocket.Exchanges;
